@@ -12,6 +12,7 @@ import logging
 import json
 import datetime
 import random
+import time
 
 
 from modules.nalida_classic_second import string_resources as sr
@@ -138,7 +139,7 @@ class ModuleNalidaClassicSecond(Module):
         context = message["context"]
         key = self.key["list_emorec_response"] % self.serialize_context(context)
         text = message["data"]["text"]
-        self.db.lpush(key, json.dumps([text, '']))
+        self.db.lpush(key, json.dumps([time.time(), text, '']))
         reactive_sentence = emorec.REPLYS[emorec.EMOTIONS.index(text)]
         self.send_text(context, reactive_sentence + ' ' + sr.ASK_EMOTION_DETAIL)
         self.user.state(context, 'asked_emotion_detail')
@@ -168,7 +169,7 @@ class ModuleNalidaClassicSecond(Module):
                 text = text[len(sr.COMMAND_NOT_TO_SHARE_EMOTION):].strip()
                 share = False
             recent_response = json.loads(self.db.lpop(key))
-            recent_response[1] = text
+            recent_response[2] = text
             self.db.lpush(key, json.dumps(recent_response))
             nickname = self.user.nick(context)
             self.send_to_monitoring(sr.REPORT_EMOREC_DETAIL % (nickname, text))
