@@ -341,6 +341,15 @@ class ModuleNalidaClassicSecond(Module):
                     for target_context in target_contexts:
                         self.send_text(target_context, content)
                     self.send_text(context, sr.REPORT_NOTICE_COMPLETE)
+                elif args[0] == sr.COMMAND_GET_EMOREC_TIME:
+                    for target_context in self.user.list_of_users():
+                        if self.user.nick(target_context) == args[1]:
+                            self.send_text(context, '%r' % self.user.emorec_time(target_context))
+                elif args[0] == sr.COMMAND_NEXT_EMOREC_TIME:
+                    for target_context in self.user.list_of_users():
+                        if self.user.nick(target_context) == args[1]:
+                            self.user.emorec_time(target_context, True)
+                            self.send_text(context, '%r' % self.user.emorec_time(target_context))
 
         except Exception as exception: #pylint: disable=broad-except
             self.send_text({"chat_id": bot_config.NALIDA_CLASSIC_SECOND_ADMIN},

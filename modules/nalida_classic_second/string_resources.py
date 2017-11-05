@@ -81,3 +81,6 @@ REPORT_GOAL_NAME = '%s님의 목표 이름: %s'
 REPORT_GOAL_DESCRIPTION = '%s님의 목표 설명: %s'
 REPORT_EMOREC_SHARING = '%s님의 감정: %s'
 REPORT_EMOREC_DETAIL = '%s님의 감정설명: %s'
+
+COMMAND_GET_EMOREC_TIME = '감정기록시간'
+COMMAND_NEXT_EMOREC_TIME = '감정기록시간재설정'
