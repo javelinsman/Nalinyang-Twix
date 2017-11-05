@@ -209,7 +209,7 @@ class ModuleNalidaClassicSecond(Module):
 
         key = self.key["list_goal_achievement"] % self.serialize_context(context)
         file_id = message["data"]["file_ids"][-1]
-        self.db.lpush(key, json.dumps([file_id, '']))
+        self.db.lpush(key, json.dumps([time.time(), file_id, '']))
         self.send_text(context, sr.ASK_GOAL_ACHIEVEMENT_DETAIL)
         self.user.state(context, 'asked_goal_detail')
 
@@ -252,7 +252,7 @@ class ModuleNalidaClassicSecond(Module):
                 share = False
             key = self.key["list_goal_achievement"] % self.serialize_context(context)
             recent_response = json.loads(self.db.lpop(key))
-            recent_response[1] = text
+            recent_response[2] = text
             self.db.lpush(key, json.dumps(recent_response))
 
             if share and self.user.session(context) is not None:
