@@ -48,7 +48,7 @@ COMMAND_NOT_TO_SHARE_GOAL = '비공개' #노터치
 
 # 감정기록
 ASK_EMOTION = '지금은 무슨 감정을 느끼고 있나요?\n메시지를 늦게 보았어도 현재의 상태를 기록해주세요.'
-EMOREC_SHARING_MESSAGE = '지금 어떤 동료는 이름 감정을 느끼고 있대요: %s'
+EMOREC_SHARING_MESSAGE = '지금 어떤 동료는 이런 감정을 느끼고 있대요: %s'
 ASK_EMOTION_DETAIL = '감정을 더 자세히 설명해주세요.'
 EMOREC_SHARING_DETAILED_MESSAGE = '감정 설명: %s'
 EMOREC_RESPONSE_RECORDED_AND_SHARED = '응답이 기록되고 공유되었어요. 감사합니다!'
