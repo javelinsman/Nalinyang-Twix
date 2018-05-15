@@ -114,6 +114,18 @@ class ModuleNalidaClassicThird(Module):
         nickname = self.user.nick(context)
         self.send_to_monitoring(sr.REPORT_EMOREC_SHARING % (nickname, text))
 
+    def emorec_get_associated_records(self, context, current_time):
+        key = self.key["list_emorec_response"] % self.serialize_context(context)
+        last_three = []
+        for _ in range(3):
+            last_three.append(self.db.lpop(key))
+        last_three.reverse()
+        for record in last_three:
+            self.db.lpush(key, record)
+        associated_records = [json.loads(record)[1] for record in last_three if
+            current_time - json.loads(record)[0] <= 24 * 3600]
+        return associated_records
+
     def state_asked_emotion_detail(self, message):
         "record emotion response detail"
         context = message["context"]
@@ -130,11 +142,13 @@ class ModuleNalidaClassicThird(Module):
             nickname = self.user.nick(context)
             self.send_to_monitoring(sr.REPORT_EMOREC_DETAIL % (nickname, text))
             if share and self.user.session(context) is not None:
+                associated_records = self.emorec_get_associated_records(context, time.time())
+                associated_record_message = '\n'.join(associated_records)
                 message_to_share = {
                     "type": 'text',
                     "context": None,
                     "data": {
-                        "text": sr.EMOREC_SHARING_DETAILED_MESSAGE % text
+                        "text": sr.EMOREC_SHARING_DETAILED_MESSAGE % (associated_record_message, text)
                         }
                     }
                 self.session.share_user_response(context, message_to_share)
