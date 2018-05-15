@@ -16,7 +16,7 @@ import bot_config
 from interfaces.telegram.receiver import InterfaceTelegramReceiver
 from interfaces.telegram.sender import InterfaceTelegramSender
 from interfaces.timer.timer import Timer
-from modules.nalida_classic_second.module import ModuleNalidaClassicSecond
+from modules.nalida_classic_third.module import ModuleNalidaClassicThird
 
 
 # Basic Settings for Program
@@ -33,7 +33,7 @@ INTERFACES = {
     "timer": Timer(),
 }
 MODULES = {
-    "nalida_classic_second": ModuleNalidaClassicSecond(),
+    "nalida_classic_third": ModuleNalidaClassicThird(),
 }
 
 def start_components():
