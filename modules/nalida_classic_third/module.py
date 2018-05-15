@@ -157,6 +157,7 @@ class ModuleNalidaClassicThird(Module):
             elapsed_time = (datetime_now - datetime_baseline).seconds
             if datetime_baseline <= datetime_now and elapsed_time <= 180:
                 if when != 'night':
+                    self.user.state(context, '')
                     self.send({
                         "type": 'markup_text',
                         "context": context,
