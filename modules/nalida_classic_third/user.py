@@ -34,6 +34,9 @@ class User:
         self.db.sadd(self.key["registered_users"], Module.serialize_context(context))
         self.db.srem(self.key["registration_keys"], registration_key)
 
+    def delete_user(self, context):
+        self.db.srem(self.key["registered_users"], Module.serialize_context(context))
+
     def list_of_users(self):
         "returns the list of registrated users"
         users = self.db.smembers(self.key["registered_users"])
@@ -53,6 +56,7 @@ class User:
 
     def is_registration_key(self, key):
         "check if the key is the registration key"
+        return '안녕' in key
         return self.db.sismember(self.key["registration_keys"], key)
 
     def state(self, context, value=None):

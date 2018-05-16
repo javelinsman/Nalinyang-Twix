@@ -248,7 +248,16 @@ class ModuleNalidaClassicThird(Module):
                         "data": {"time": json.dumps(fake_time)}
                     }
                     self.operator(fake_message)
-
+                elif args[0] == sr.COMMAND_LIST_USERS:
+                    self.send_text(context, '\n'.join(
+                        ['[%s] %s' % (self.user.nick(target_context), self.serialize_context(target_context))
+                            for target_context in self.user.list_of_users()]
+                        )
+                    )
+                elif args[0] == sr.COMMAND_DELETE_USER:
+                    serialized = args[1]
+                    self.user.delete_user(self.parse_context(serialized))
+                    
 
         except Exception as exception: #pylint: disable=broad-except
             self.send_text({"chat_id": bot_config.NALIDA_CLASSIC_THIRD_ADMIN},
