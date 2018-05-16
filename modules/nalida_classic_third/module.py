@@ -118,6 +118,7 @@ class ModuleNalidaClassicThird(Module):
         key = self.key["list_emorec_response"] % self.serialize_context(context)
         records = self.db.lrange(key, 0, -1)
         records = [json.loads(record) for record in records if record != "None" and record is not None]
+        records.reverse()
         associated_records = [record[1] for record in records if
             current_time - record[0] <= 24 * 3600]
         return associated_records
