@@ -114,16 +114,12 @@ class ModuleNalidaClassicThird(Module):
         nickname = self.user.nick(context)
         self.send_to_monitoring(sr.REPORT_EMOREC_SHARING % (nickname, text))
 
-    def emorec_get_associated_records(self, context, current_time):
+    def emorec_get_associated_records(self, context, current_time): #TODO O(N)
         key = self.key["list_emorec_response"] % self.serialize_context(context)
-        last_three = []
-        for _ in range(3):
-            last_three.append(self.db.lpop(key))
-        last_three.reverse()
-        for record in last_three:
-            self.db.lpush(key, record)
-        associated_records = [json.loads(record)[1] for record in last_three if
-            current_time - json.loads(record)[0] <= 24 * 3600]
+        records = self.db.lrange(key, 0, -1)
+        records = [json.loads(record) for record in records if record != "None" and record is not None]
+        associated_records = [record[1] for record in records if
+            current_time - record[0] <= 24 * 3600]
         return associated_records
 
     def state_asked_emotion_detail(self, message):
@@ -136,7 +132,10 @@ class ModuleNalidaClassicThird(Module):
             if text.startswith(sr.COMMAND_NOT_TO_SHARE_EMOTION):
                 text = text[len(sr.COMMAND_NOT_TO_SHARE_EMOTION):].strip()
                 share = False
-            recent_response = json.loads(self.db.lpop(key))
+            recent_response = self.db.lpop(key)
+            if recent_response is None: # this if-clause exists for the bug during beta-testing
+                return
+            recent_response = json.loads(recent_response)
             recent_response[2] = text
             self.db.lpush(key, json.dumps(recent_response))
             nickname = self.user.nick(context)
