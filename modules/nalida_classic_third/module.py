@@ -95,7 +95,7 @@ class ModuleNalidaClassicThird(Module):
             self.user.explanation(context, text)
             nickname = self.user.nick(context)
             self.send_to_monitoring(sr.REPORT_EXPLANATION % (nickname, text))
-            self.send_text(context, sr.EXPLANATION_SUBMITTED)
+            self.send_text(context, sr.EXPLANATION_SUBMITTED % nickname)
             self.send_text(context, sr.INSTRUCTIONS_FOR_EMOREC)
             self.user.emorec_time(context, True)
             self.user.state(context, '')
@@ -108,7 +108,8 @@ class ModuleNalidaClassicThird(Module):
         key = self.key["list_emorec_response"] % self.serialize_context(context)
         text = message["data"]["text"]
         self.db.lpush(key, json.dumps([time.time(), text, '']))
-        reactive_sentence = emorec.REPLYS[emorec.EMOTIONS.index(text)]
+        reactive_sentences = emorec.REPLYS[emorec.EMOTIONS.index(text)]
+        reactive_sentence = random.choice(reactive_sentences)
         self.send_text(context, reactive_sentence)
 
         nickname = self.user.nick(context)

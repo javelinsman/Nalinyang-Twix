@@ -24,7 +24,7 @@ WRONG_RESPONSE_FORMAT = '잘못된 형식의 답변입니다.'
 NICKNAME_SUBMITTED = '이제부터 %s님이라고 부를게요!'
 ASK_NICKNAME_AGAIN = '그럼 뭐예요?'
 ASK_EXPLANATION_FOR_NICKNAME = '이런 별칭을 짓게 되신 계기는 무엇인가요? 2~3문장으로 답변해주세요.'
-EXPLANATION_SUBMITTED = '좋은 설명 잘 들었어요!'
+EXPLANATION_SUBMITTED = '좋은 설명 잘 들었어요. %s님을 조금 더 잘 알게 된 것 같아서 기뻐요!'
 INSTRUCTIONS_FOR_EMOREC = '그리고 오늘부터 하루에 3번씩 랜덤한 시각에 지금 어떤 감정을 느끼고 있는지를 물어볼 거예요. 나의 감정을 파악하는 데 도움이 되는 활동이니까 성실하게 답변해주시기를 바라요. 지금 바로 한번 연습해 볼까요?.'
 
 # 감정기록
