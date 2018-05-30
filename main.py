@@ -15,6 +15,7 @@ import bot_config
 # Bot Components
 from interfaces.telegram.receiver import InterfaceTelegramReceiver
 from interfaces.telegram.sender import InterfaceTelegramSender
+from interfaces.emorec_viewer.interface import InterfaceEmorecViewer
 from interfaces.timer.timer import Timer
 from modules.nalida_classic_third.module import ModuleNalidaClassicThird
 
@@ -30,6 +31,7 @@ else:
 INTERFACES = {
     "telegram_receiver": InterfaceTelegramReceiver(host=bot_config.HOST, port=bot_config.PORT),
     "telegram_sender": InterfaceTelegramSender(),
+    "emorec_viewer": InterfaceEmorecViewer(host=bot_config.HOST, port=bot_config.EMOREC_VIEWER_PORT),
     "timer": Timer(),
 }
 MODULES = {
