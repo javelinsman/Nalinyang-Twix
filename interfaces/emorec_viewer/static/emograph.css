@@ -1,0 +1,36 @@
+html {
+}
+
+.flex {
+	display: flex;
+	flex-direction: column;
+}
+
+canvas {
+	margin: auto;
+	width: 1200px;
+	height: 600px;
+	/*
+	width: 1800px
+	height: 850px;
+	*/
+}
+
+.flex div{
+	margin: auto;
+}
+
+#statistics{
+	font-size: 200%;
+}
+
+.vis {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.vis div{
+    margin: auto;
+}

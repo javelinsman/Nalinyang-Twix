@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="/static/emograph.css">
+</head>
+<body>
+
+<div class="flex">
+    <canvas id="my_canvas" width="1800" height="850" style="border:1px solid #000000;">
+    Your browser does not support the HTML5 canvas tag.
+    </canvas>
+    <div>
+        <button id="prev">이전</button>
+        <button id="next">다음</button>
+    </div>
+    <div id="person_name"></div>
+
+    <div>
+        [기쁨, 설렘, 상쾌함], [신남, 즐거움, 열정적], [슬픔, 후회, 우울], [짜증, 화남, 불쾌], [복합 감정], [기타 감정], [평범하다]
+    </div>
+    <div id="statistics"></div>
+</div>
+<div class="vis">
+    <div id="pie"></div>
+    <div id="vis1"></div>
+    <div id="vis2"></div>
+    <div id="vis3"></div>
+    <div id="vis4"></div>
+    <div id="vis5"></div>
+    <div id="vis6"></div>
+    <div id="vis7"></div>
+</div>
+<div id="details"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/vega@3"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@3"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="/static/emograph.js" type="text/javascript"></script>
+</body>
+</html>
